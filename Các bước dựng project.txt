@@ -1,0 +1,16 @@
+﻿1. Tạo các project , thư mục
+2. Tạo các entity
+3. Referentce đến các project
+4. Tạo các interface và các công việc cần làm
+5. Kế thừa và triển khai từ interface
+6. 
+
+
+
+
+
+
+
+Core xử lý nội bộ hệ thống
+Infrastructure: tương tác với database và bên thứ 3, validate dữ liệu
+App: nhận request từ client truyền sang infrastructure
