@@ -156,6 +156,11 @@ namespace MISA.CukCuk.Core.Entities
         /// Created by CMChau 19/05/2021
         public string BankBranch { get; set; }
 
+        /// <summary>
+        /// Số thứ tự
+        /// </summary>
+        /// CreatedBy CMChau 13/6/2021
+        public int Sort { set; get; }
         #endregion
 
 

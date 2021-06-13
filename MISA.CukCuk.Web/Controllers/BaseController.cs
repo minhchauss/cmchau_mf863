@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ClosedXML.Excel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MISA.CukCuk.Core.Interfaces.Repository;
 using MISA.CukCuk.Core.Interfaces.Services;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,7 +18,7 @@ namespace MISA.CukCuk.Web.Controllers
     {
 
         #region Declare
-
+        
         IBaseRepository<MSEntity> _baseRepository;
         IBaseService<MSEntity> _baseService;
         public BaseController(IBaseRepository<MSEntity> baseRepository, IBaseService<MSEntity> baseService)
@@ -159,6 +162,27 @@ namespace MISA.CukCuk.Web.Controllers
             var res = _baseService.GetNewCode();
             return Ok(res);
         }
+
+       
+
+
+        //public DataTable getData()
+        //{
+        //    //Creating DataTable  
+        //    DataTable dt = new DataTable();
+        //    //Setiing Table Name  
+        //    dt.TableName = "EmployeeData";
+        //    //Add Columns  
+        //    dt.Columns.Add("ID", typeof(int));
+        //    dt.Columns.Add("Name", typeof(string));
+        //    dt.Columns.Add("City", typeof(string));
+        //    //Add Rows in DataTable  
+        //    dt.Rows.Add(1, "Anoop Kumar Sharma", "Delhi");
+        //    dt.Rows.Add(2, "Andrew", "U.P.");
+        //    dt.AcceptChanges();
+        //    return dt;
+        //}
+
         #endregion
     }
 }
