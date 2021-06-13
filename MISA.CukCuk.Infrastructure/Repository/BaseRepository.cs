@@ -85,14 +85,6 @@ namespace MISA.CukCuk.Infrastructure.Repository
         {
             using (_dbConnection = new MySqlConnection(_connectionString))
             {
-                var properties = typeof(MSEntity).GetProperties();
-                foreach (var property in properties)
-                {
-                    if(property.Name==$"{_className}Id")
-                    {
-                        property.SetValue(entity, Guid.NewGuid());
-                    }
-                }
                 // Gọi procedure
                 var sqlCommnad = $"Proc_Insert{_className}";
                 // Tiến hành thêm mới 
