@@ -22,7 +22,7 @@ namespace MISA.CukCuk.Infrastructure.Repository
         IDbConnection _dbConnection;
         readonly string _connectionString;
         IConfiguration _configuration;
-        DynamicParameters Parameters;
+        DynamicParameters Parameters = new DynamicParameters();
         string _className = typeof(MSEntity).Name;
         public BaseRepository(IConfiguration configuration)
         {
@@ -33,7 +33,25 @@ namespace MISA.CukCuk.Infrastructure.Repository
 
         #region Methods
 
-
+        /// <summary>
+        /// Mapping các value vào các tham số trong Procedure
+        /// </summary>
+        /// <param name="customer">đối tượng thêm mới vào database</param>
+        /// Created by CMChâu 21/05/2021
+        void MappingProcParamValueWithObject(MSEntity entity)
+        {
+            // Lấy ra các property của đối tượng
+            var properties = typeof(MSEntity).GetProperties();
+            foreach (var property in properties)
+            {
+                // Lấy ra giá trị của property
+                var value = property.GetValue(entity);
+                // Lấy ra tên của property
+                var propertyName = property.Name;
+                // Gán các tham số vào Parameters
+                Parameters.Add($"@m_{propertyName}", value);
+            }
+        }
         public IEnumerable<MSEntity> GetAll()
         {
 
@@ -67,6 +85,14 @@ namespace MISA.CukCuk.Infrastructure.Repository
         {
             using (_dbConnection = new MySqlConnection(_connectionString))
             {
+                var properties = typeof(MSEntity).GetProperties();
+                foreach (var property in properties)
+                {
+                    if(property.Name==$"{_className}Id")
+                    {
+                        property.SetValue(entity, Guid.NewGuid());
+                    }
+                }
                 // Gọi procedure
                 var sqlCommnad = $"Proc_Insert{_className}";
                 // Tiến hành thêm mới 
@@ -101,7 +127,7 @@ namespace MISA.CukCuk.Infrastructure.Repository
                 // Gọi procedure
                 var sqlCommnad = $"Proc_Delete{_className}";
                 // Thêm param
-                Parameters.Add($"p_{_className}Id", id);
+                Parameters.Add($"m_{_className}Id", id);
                 // Tiến hành xóa
                 var rowEffect = _dbConnection.Execute(sqlCommnad, param: Parameters, commandType: CommandType.StoredProcedure);
                 return rowEffect;
@@ -116,8 +142,8 @@ namespace MISA.CukCuk.Infrastructure.Repository
                 // Gọi procedure
                 var sqlCommnad = $"Proc_GetNew{_className}Code";
                 // 
-                var entities = _dbConnection.QueryFirstOrDefault<string>(sqlCommnad, commandType: CommandType.StoredProcedure);
-                return entities;
+                var res = _dbConnection.QueryFirstOrDefault<string>(sqlCommnad, commandType: CommandType.StoredProcedure);
+                return res;
             }
         }
 
@@ -132,7 +158,6 @@ namespace MISA.CukCuk.Infrastructure.Repository
                 Parameters.Add($"m_PageSize", pageSize);
                 Parameters.Add($"m_FullName", textFilter);
                 Parameters.Add($"m_{_className}Code", textFilter);
-                Parameters.Add($"m_PhoneNumber", textFilter);
                 var entities = _dbConnection.Query<MSEntity>(sqlCommnad, param: Parameters, commandType: CommandType.StoredProcedure);
                 return entities;
             }
@@ -160,7 +185,7 @@ namespace MISA.CukCuk.Infrastructure.Repository
         /// </summary>
         /// <param name="EntityCode">Mã kiểm tra</param>
         /// <returns>True - bị trùng, False - không bị trùng</returns>
-        public bool CheckCodeExist(string entityCode,Guid entityId)
+        public bool CheckCodeExist(string entityCode,Guid? entityId)
         {
             using (_dbConnection = new MySqlConnection(_connectionString))
             {

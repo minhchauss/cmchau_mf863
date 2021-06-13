@@ -13,7 +13,7 @@ namespace MISA.CukCuk.Core.Interfaces.Services
 
         #endregion
         #region Methods
-
+       
         #endregion
     }
 }

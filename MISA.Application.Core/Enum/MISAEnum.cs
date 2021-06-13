@@ -10,20 +10,30 @@ namespace MISA.CukCuk.Core.Enum
     /// Trạng thái của object
     /// </summary>
     /// Created by CMChau 22/05/2021
+    /// <summary>
+    /// Kiểu phương thức 
+    /// </summary>
     public enum EntityState
     {
         /// <summary>
-        /// Thêm mới
+        /// Lấy dữ liệu
         /// </summary>
-        Add=1,
+        GET,
+
         /// <summary>
-        /// Thêm mới
+        /// Thêm mới dữ liệu
         /// </summary>
-        Update=2,
+        INSERT,
+
         /// <summary>
-        /// Xóa
+        /// Sửa dữ liệu
         /// </summary>
-        Delete=3
+        UPDATE,
+
+        /// <summary>
+        /// Xóa dữ liệu
+        /// </summary>
+        DELETE
     }
 
     /// <summary>

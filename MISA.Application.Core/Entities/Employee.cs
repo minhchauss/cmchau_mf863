@@ -1,6 +1,8 @@
 ﻿using MISA.CukCuk.Core.Commons.Attributes;
+using MISA.CukCuk.Core.Enum;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,14 +27,15 @@ namespace MISA.CukCuk.Core.Entities
         /// Mã nhân viên
         /// </summary>
         /// Created by CMChau 19/05/2021
-        [Required("Mã nhân viên không được để trống.")]
+        [MSRequired("Mã nhân viên không được để trống.")]
+        [MSDuplicate("Mã nhân viên đã tồn tại trong hệ thống.")]
         public string EmployeeCode { get; set; }
 
         /// <summary>
         /// Họ và tên nhân viên
         /// </summary>
         /// Created by CMChau 19/05/2021
-        [Required("Họ và tên không được để trống.")]
+        [MSRequired("Họ và tên không được để trống.")]
         public string FullName { get; set; }
 
         /// <summary>
@@ -48,6 +51,28 @@ namespace MISA.CukCuk.Core.Entities
         /// Created by CMChau 19/05/2021
         public int? Gender { get; set; }
 
+        public string GenderName
+        {
+            get
+            {
+                var name = string.Empty;
+                switch ((Enum.Gender)Gender)
+                {
+                    case Enum.Gender.Female:
+                        name = Properties.Resources.Enum_Gender_Female;
+                        break;
+                    case Enum.Gender.Male:
+                        name = Properties.Resources.Enum_Gender_Male;
+                        break;
+                    case Enum.Gender.Other:
+                        name = Properties.Resources.Enum_Gender_Other;
+                        break;
+                    default:
+                        break;
+                }
+                return name;
+            }
+        }
         /// <summary>
         /// Địa chỉ nhân viên
         /// </summary>
@@ -64,6 +89,7 @@ namespace MISA.CukCuk.Core.Entities
         /// Ngày cấp CMND
         /// </summary>
         /// Created by CMChau 19/05/2021
+        [MSDuplicate("Số CMND/Căn Cước đã tồn tại trong hệ thống.")]
         public DateTime? IdentityDate { get; set; }
 
         /// <summary>
@@ -82,7 +108,7 @@ namespace MISA.CukCuk.Core.Entities
         /// Tên phòng ban
         /// </summary>
         /// Created by CMChau 19/05/2021
-        [Required("Phòng ban không được để trống")]
+        [MSRequired("Phòng ban không được để trống")]
         public string DepartmentName { get; set; }
 
         /// <summary>
@@ -95,6 +121,7 @@ namespace MISA.CukCuk.Core.Entities
         /// Số điện thoại di động nhân viên
         /// </summary>
         /// Created by CMChau 19/05/2021
+        [MSDuplicate("Số điện thoại di động đã tồn tại trong hệ thống.")]
         public string MobilePhoneNumber { get; set; }
 
         /// <summary>
@@ -107,12 +134,14 @@ namespace MISA.CukCuk.Core.Entities
         /// Email nhân viên
         /// </summary>
         /// Created by CMChau 19/05/2021
+        [MSDuplicate("Email đã tồn tại trong hệ thống.")]
         public string Email { get; set; }
 
         /// <summary>
         /// Số tài khoản ngân hàng nhân viên
         /// </summary>
         /// Created by CMChau 19/05/2021
+        [MSDuplicate("Số tài khoản ngân hàng đã tồn tại trong hệ thống.")]
         public string BankAccount { get; set; }
 
         /// <summary>

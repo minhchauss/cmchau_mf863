@@ -40,8 +40,11 @@ namespace MISA.CukCuk.Core.Entities
         /// Created by CMChau 19/05/2021
         public DateTime ModifiedDate { get; set; }
 
-
-        public EntityState EntityState { get; set; } = EntityState.Add;
+        /// <summary>
+        /// Trạng thái của đối tượng
+        /// </summary>
+        /// Created by CMChau 12/06/2021
+        public EntityState EntityState { get; set; } = EntityState.INSERT;
         #endregion
     }
 }

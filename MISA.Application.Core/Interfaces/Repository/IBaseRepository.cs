@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MISA.CukCuk.Core.Interfaces.Repository
 {
-    public interface IBaseRepository<MSEnity>
+    public interface IBaseRepository<MSEntity>
     {
         #region Declare
 
@@ -21,7 +21,7 @@ namespace MISA.CukCuk.Core.Interfaces.Repository
         /// </summary>
         /// <returns>Danh sách tất cả bản ghi</returns>
         /// CreatedBy CMChau 19/05/2021
-        public IEnumerable<MSEnity> GetAll();
+        public IEnumerable<MSEntity> GetAll();
 
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace MISA.CukCuk.Core.Interfaces.Repository
         /// <param name="entityId">Id của bản ghi</param>
         /// <returns>Thông tin chi tiết của 1 bản ghi</returns>
         /// CreatedBy CMChau 19/05/2021
-        public MSEnity GetById(Guid entityId);
+        public MSEntity GetById(Guid entityId);
 
         /// <summary>
         /// Cập nhật thông tin của 1 bản ghi
@@ -39,7 +39,7 @@ namespace MISA.CukCuk.Core.Interfaces.Repository
         /// <param name="entityid">Id của bản ghi cần sửa</param>
         /// <returns>Số dòng đã update trong database</returns>
         /// CreatedBy CMChau 19/05/2021
-        public int Update(MSEnity entity, Guid entityid);
+        public int Update(MSEntity entity, Guid entityid);
 
         /// <summary>
         /// Thêm mới 1 bản ghi
@@ -47,7 +47,7 @@ namespace MISA.CukCuk.Core.Interfaces.Repository
         /// <param name="entity">thông tin của 1 bản ghi</param>
         /// <returns>Số dòng đã thêm được vào database</returns>
         /// CreatedBy CMChau 19/05/2021
-        public int Insert(MSEnity entity);
+        public int Insert(MSEntity entity);
 
         /// <summary>
         /// Xóa 1 bản ghi
@@ -80,7 +80,7 @@ namespace MISA.CukCuk.Core.Interfaces.Repository
         /// <param name="textFilter">Từ khóa lọc</param>
         /// <returns>Danh sách theo phân trang</returns>
         /// CreatedBy CMChau 19/05/2021
-        public IEnumerable<MSEnity> GetPagingFilter(int pageIndex, int pageSize, string textFilter);
+        public IEnumerable<MSEntity> GetPagingFilter(int pageIndex, int pageSize, string textFilter);
 
         /// <summary>
         /// Kiểm tra trùng mã 
@@ -88,7 +88,7 @@ namespace MISA.CukCuk.Core.Interfaces.Repository
         /// <param name="EntityCode">Mã cần kiểm tra</param>
         /// <returns>True - mã bị trùng,false - mã không bị trùng</returns>
         /// CreatedBy CMChau 12/06/2021
-        public bool CheckCodeExist(string entityCode,Guid entityId);
+        public bool CheckCodeExist(string entityCode,Guid? entityId=null);
         #endregion
     }
 }

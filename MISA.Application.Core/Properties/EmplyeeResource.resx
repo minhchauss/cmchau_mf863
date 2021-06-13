@@ -117,31 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Enum_Gender_Female" xml:space="preserve">
-    <value>Nữ</value>
+  <data name="Error_Duplicate_EmployeeCode" xml:space="preserve">
+    <value>Mã nhân viên đã tồn tại trong hệ thống.</value>
   </data>
-  <data name="Enum_Gender_Male" xml:space="preserve">
-    <value>Nam</value>
+  <data name="Error_IdentityNo_Exist" xml:space="preserve">
+    <value>Số CMND/Căn cước đã tồn tại trong hệ thống.</value>
   </data>
-  <data name="Enum_Gender_Other" xml:space="preserve">
-    <value>Khác</value>
-  </data>
-  <data name="Error_PageIndex" xml:space="preserve">
-    <value>PageIndex phải lớn hơn 0.</value>
-  </data>
-  <data name="Error_PageSize" xml:space="preserve">
-    <value>PageSize phải lớn hơn 0.</value>
-  </data>
-  <data name="Erro_Exception" xml:space="preserve">
-    <value>Có lỗi xảy ra vui lòng liên hệ MISA để được hỗ trợ.</value>
-  </data>
-  <data name="Info_NotNull" xml:space="preserve">
-    <value>Thông tin nhân viên : {0} không được để trống.</value>
-  </data>
-  <data name="ValidateMsg_CustomerCodeExist" xml:space="preserve">
-    <value>Mã khách hàng đã tồn tại.</value>
-  </data>
-  <data name="ValidateMsg_PhoneNumberExist" xml:space="preserve">
-    <value>Số điện thoại đã tồn tại.</value>
+  <data name="Error_PhoneNumber_Exist" xml:space="preserve">
+    <value>Số điện thoại đã tồn tại trong hệ thống.</value>
   </data>
 </root>

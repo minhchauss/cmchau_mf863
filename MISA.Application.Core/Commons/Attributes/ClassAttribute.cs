@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 namespace MISA.CukCuk.Core.Commons.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
-   public class Required:Attribute
+   public class MSRequired:Attribute
     {
         public string Msg;
-        public Required(string msg)
+        public MSRequired(string msg)
         {
             Msg = msg;
         }
     }
-    public class Duplicate : Attribute
+    public class MSDuplicate : Attribute
     {
         public string ErrorMsg;
-        public Duplicate(string msg)
+        public MSDuplicate(string msg)
         {
             ErrorMsg = msg;
         }

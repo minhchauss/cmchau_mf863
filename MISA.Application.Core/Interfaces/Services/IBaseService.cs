@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MISA.CukCuk.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,8 +34,16 @@ namespace MISA.CukCuk.Core.Interfaces.Services
         /// <returns>Mã mới nhất</returns>
         /// CreatedBy CMChau 12/06/2021
         public string GetNewCode();
-       
 
+        /// <summary>
+        /// Lấy danh sách theo phân trang
+        /// </summary>
+        /// <param name="pageIndex">Trang số</param>
+        /// <param name="pageSize">Số bản ghi/trang</param>
+        /// <param name="textFilter">Từ khóa lọc</param>
+        /// <returns>Danh sách theo phân trang</returns>
+        /// CreatedBy CMChau 19/05/2021
+        public PaggingData<MSEntity> GetPagingFilter(int pageIndex, int pageSize, string textFilter);
         #endregion
     }
 }

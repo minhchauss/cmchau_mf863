@@ -33,7 +33,7 @@ namespace MISA.CukCuk.Core.Services
         void ValidateCustomer(Customer customer)
         {
             var isDuplicate = false;
-            if (customer.EntityState == Enum.EntityState.Add)
+            if (customer.EntityState == Enum.EntityState.INSERT)
                 //Check dữ liệu  khách hàng
                 isDuplicate = _customerRepository.CheckCodeExist(customer.CustomerCode, customer.CustomerId);
             if (isDuplicate == true)

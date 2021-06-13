@@ -61,7 +61,34 @@ namespace MISA.CukCuk.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Có lỗi xảy ra vui lòng liên hệ MISA để được hỗ trợ.
+        ///   Looks up a localized string similar to Nữ.
+        /// </summary>
+        public static string Enum_Gender_Female {
+            get {
+                return ResourceManager.GetString("Enum_Gender_Female", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nam.
+        /// </summary>
+        public static string Enum_Gender_Male {
+            get {
+                return ResourceManager.GetString("Enum_Gender_Male", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Khác.
+        /// </summary>
+        public static string Enum_Gender_Other {
+            get {
+                return ResourceManager.GetString("Enum_Gender_Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Có lỗi xảy ra vui lòng liên hệ MISA để được hỗ trợ..
         /// </summary>
         public static string Erro_Exception {
             get {
@@ -70,7 +97,34 @@ namespace MISA.CukCuk.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mã khách hàng đã tồn tại.
+        ///   Looks up a localized string similar to PageIndex phải lớn hơn 0..
+        /// </summary>
+        public static string Error_PageIndex {
+            get {
+                return ResourceManager.GetString("Error_PageIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PageSize phải lớn hơn 0..
+        /// </summary>
+        public static string Error_PageSize {
+            get {
+                return ResourceManager.GetString("Error_PageSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thông tin nhân viên : {0} không được để trống..
+        /// </summary>
+        public static string Info_NotNull {
+            get {
+                return ResourceManager.GetString("Info_NotNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã khách hàng đã tồn tại..
         /// </summary>
         public static string ValidateMsg_CustomerCodeExist {
             get {
@@ -79,7 +133,7 @@ namespace MISA.CukCuk.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Số điện thoại đã tồn tại.
+        ///   Looks up a localized string similar to Số điện thoại đã tồn tại..
         /// </summary>
         public static string ValidateMsg_PhoneNumberExist {
             get {
