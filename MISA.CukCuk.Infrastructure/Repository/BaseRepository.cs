@@ -157,6 +157,7 @@ namespace MISA.CukCuk.Infrastructure.Repository
 
 
 
+
         public int GetCountFilter(string textFilter)
         {
             using (_dbConnection = new MySqlConnection(_connectionString))
@@ -189,6 +190,19 @@ namespace MISA.CukCuk.Infrastructure.Repository
                 var res = _dbConnection.ExecuteScalar<bool>(sqlCommand, Parameters, commandType: CommandType.StoredProcedure);
                 return res;
 
+            }
+        }
+
+        public IEnumerable<MSEntity> GetAllFilter(string textFilter)
+        {
+            using (_dbConnection = new MySqlConnection(_connectionString))
+            {
+                // Gọi procedure
+                var sqlCommnad = $"Proc_Get{_className}sFilter";
+                Parameters.Add($"m_FullName", textFilter);
+                Parameters.Add($"m_{_className}Code", textFilter);
+                var entities = _dbConnection.Query<MSEntity>(sqlCommnad, param: Parameters, commandType: CommandType.StoredProcedure);
+                return entities;
             }
         }
         #endregion

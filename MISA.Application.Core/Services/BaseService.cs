@@ -21,6 +21,12 @@ namespace MISA.CukCuk.Core.Services
         {
             _baseRepository = baseRepository;
         }
+
+        public IEnumerable<MSEntity> GetAllFilter(string textFilter)
+        {
+            var entities = _baseRepository.GetAllFilter(textFilter);
+            return entities;
+        }
         #endregion
 
 

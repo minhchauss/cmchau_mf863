@@ -83,6 +83,14 @@ namespace MISA.CukCuk.Core.Interfaces.Repository
         public IEnumerable<MSEntity> GetPagingFilter(int pageIndex, int pageSize, string textFilter);
 
         /// <summary>
+        /// Lấy toàn bộ danh sách theo lọc
+        /// </summary>
+        /// <param name="textFilter">Từ khóa lọc</param>
+        /// <returns>Danh sách theo lọc</returns>
+        /// CreatedBy CMChau 14/6/2021
+        public IEnumerable<MSEntity> GetAllFilter(string textFilter);
+
+        /// <summary>
         /// Kiểm tra trùng mã 
         /// </summary>
         /// <param name="EntityCode">Mã cần kiểm tra</param>

@@ -16,7 +16,21 @@ namespace MISA.CukCuk.Core.Interfaces.Services
 
         #endregion
         #region Methods
-        public byte[] ExportAllData();
+        /// <summary>
+        /// Xuất khẩu dữ liệu theo lọc
+        /// </summary>
+        /// <param name="textFilter">Từ khóa lọc</param>
+        /// <returns>Dữ liệu để xuất khẩu</returns>
+        /// CreatedBy CMChau 14/6/2021
+        public byte[] ExportAllData(string textFilter);
+
+        /// <summary>
+        /// Lấy ra 1 nhân viên được nhân bản
+        /// </summary>
+        /// <param name="id">id của nhân viên nhân bản</param>
+        /// <returns>Thông tin nhân viên đó với mã mới</returns>
+        /// CreatedBy CMChau 14/6/2021
+        public Employee GetDuplicateEmployee(Guid id);
         #endregion
     }
 }

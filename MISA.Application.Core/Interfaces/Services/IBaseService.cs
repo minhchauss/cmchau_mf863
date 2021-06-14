@@ -44,6 +44,16 @@ namespace MISA.CukCuk.Core.Interfaces.Services
         /// <returns>Danh sách theo phân trang</returns>
         /// CreatedBy CMChau 19/05/2021
         public PaggingData<MSEntity> GetPagingFilter(int pageIndex, int pageSize, string textFilter);
+
+
+
+        /// <summary>
+        /// Lấy toàn bộ danh sách theo lọc
+        /// </summary>
+        /// <param name="textFilter">Từ khóa lọc</param>
+        /// <returns>Danh sách theo lọc</returns>
+        /// CreatedBy CMChau 14/6/2021
+        public IEnumerable<MSEntity> GetAllFilter(string textFilter);
         #endregion
     }
 }

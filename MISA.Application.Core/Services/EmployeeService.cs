@@ -5,6 +5,7 @@ using MISA.CukCuk.Core.Entities;
 using MISA.CukCuk.Core.Interfaces.Exceptions;
 using MISA.CukCuk.Core.Interfaces.Repository;
 using MISA.CukCuk.Core.Interfaces.Services;
+using MISA.CukCuk.Core.Properties;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -34,27 +35,27 @@ namespace MISA.CukCuk.Core.Services
         protected override void CheckValidateData(Employee employee)
         {
             var isValidCode = false;
-            var isValidPhone = false;
-            var isValidIdentityNo = false;
+            //var isValidPhone = false;
+            //var isValidIdentityNo = false;
             if (employee.EntityState == Enum.EntityState.INSERT)
             {
                 isValidCode = CheckValidateCode(employee.EmployeeCode, null);
-                isValidPhone = CheckValidatePhoneNumber(employee.PhoneNumber, null);
-                isValidIdentityNo = CheckValidateIdentity(employee.IdentityNo, null);
+                //isValidPhone = CheckValidatePhoneNumber(employee.PhoneNumber, null);
+                //isValidIdentityNo = CheckValidateIdentity(employee.IdentityNo, null);
             }
 
             else
             {
                 isValidCode = CheckValidateCode(employee.EmployeeCode, employee.EmployeeId);
-                isValidPhone = CheckValidatePhoneNumber(employee.PhoneNumber, employee.EmployeeId);
-                isValidIdentityNo = CheckValidateIdentity(employee.IdentityNo, employee.EmployeeId);
+                //isValidPhone = CheckValidatePhoneNumber(employee.PhoneNumber, employee.EmployeeId);
+                //isValidIdentityNo = CheckValidateIdentity(employee.IdentityNo, employee.EmployeeId);
             }
             if (isValidCode == true)
                 throw new ValidateException(Properties.EmplyeeResource.Error_Duplicate_EmployeeCode, employee.EmployeeCode);
-            if (isValidPhone == true)
-                throw new ValidateException(Properties.EmplyeeResource.Error_PhoneNumber_Exist, employee.PhoneNumber);
-            if (isValidIdentityNo == true)
-                throw new ValidateException(Properties.EmplyeeResource.Error_IdentityNo_Exist, employee.IdentityNo);
+            //if (isValidPhone == true)
+            //    throw new ValidateException(Properties.EmplyeeResource.Error_PhoneNumber_Exist, employee.PhoneNumber);
+            //if (isValidIdentityNo == true)
+            //    throw new ValidateException(Properties.EmplyeeResource.Error_IdentityNo_Exist, employee.IdentityNo);
             base.CheckValidateData(employee);
         }
 
@@ -97,18 +98,19 @@ namespace MISA.CukCuk.Core.Services
             return res;
         }
 
-        public byte[] ExportAllData()
+        public byte[] ExportAllData(string textFilter)
         {
-            var employees = _baseRepository.GetAll();
+            var employees = _baseRepository.GetAllFilter(textFilter);
             using (var workbook = new XLWorkbook())
             {
                
                 // Định dạng row header
-                var worksheet = workbook.Worksheets.Add("Danh sách nhân viên");
-                worksheet.Columns("A", "I").AdjustToContents();
-                worksheet.Columns("A", "I").Style.Border.OutsideBorder=XLBorderStyleValues.Medium;
+                var worksheet = workbook.Worksheets.Add(Properties.ExcelResource.File_EmployeeName);
+                worksheet.Row(1).Height = 20;
+                //worksheet.Range(3, 1,employees.Count(),9).Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+
                 var rangeHeader = worksheet.Range(1, 1, 1, 9).Merge();
-                rangeHeader.Value = "DANH SÁCH NHÂN VIÊN";
+                rangeHeader.Value = ExcelResource.Header_Title;
                 rangeHeader.Style.Font.Bold = true;
                 rangeHeader.Style.Font.FontSize = 16;
                 rangeHeader.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
@@ -118,30 +120,34 @@ namespace MISA.CukCuk.Core.Services
                 var rangeTitle = worksheet.Range(3, 1, 3, 9);
                 rangeTitle.Style.Font.Bold = true;
                 rangeTitle.Style.Fill.BackgroundColor = XLColor.Gray;
+                rangeTitle.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
                 var currentRow = 3;
                 // Tiêu đề
-                worksheet.Cell(currentRow, 1).Value = "STT";
-                worksheet.Cell(currentRow, 2).Value = "Mã nhân viên";
-                worksheet.Cell(currentRow, 3).Value = "Tên nhân viên";
-                worksheet.Cell(currentRow, 4).Value = "Giới tính";
-                worksheet.Cell(currentRow, 5).Value = "Ngày sinh";
-                worksheet.Cell(currentRow, 6).Value = "Chức danh";
-                worksheet.Cell(currentRow, 7).Value = "Tên đơn vị";
-                worksheet.Cell(currentRow, 8).Value = "Số tài khoản";
-                worksheet.Cell(currentRow, 9).Value = "Tên ngân hàng";
+                worksheet.Cell(currentRow, 1).Value = ExcelResource.Title_Sort;
+                worksheet.Cell(currentRow, 2).Value = ExcelResource.Title_EmployeeCode;
+                worksheet.Cell(currentRow, 3).Value = ExcelResource.Title_Name;
+                worksheet.Cell(currentRow, 4).Value = ExcelResource.Title_Gender;
+                worksheet.Cell(currentRow, 5).Value = ExcelResource.Title_Dob;
+                worksheet.Cell(currentRow, 6).Value = ExcelResource.Title_PositionName;
+                worksheet.Cell(currentRow, 7).Value = ExcelResource.Title_DepartmentName;
+                worksheet.Cell(currentRow, 8).Value = ExcelResource.Title_BankAccount;
+                worksheet.Cell(currentRow, 9).Value = ExcelResource.Title_BankBranch;
+                // Nội dung cell
                 foreach (var employee in employees)
                 {
+                    int j = 1;
                     currentRow++;
-                    worksheet.Cell(currentRow, 1).Value = employee.Sort;
+                    worksheet.Cell(currentRow, 1).Value = j;
                     worksheet.Cell(currentRow, 2).Value = employee.EmployeeCode;
                     worksheet.Cell(currentRow, 3).Value = employee.FullName;
                     worksheet.Cell(currentRow, 4).Value = employee.GenderName;
                     worksheet.Cell(currentRow, 5).Value = employee.DateOfBirth;
-                    worksheet.Cell(currentRow, 6).Value = employee.DepartmentName;
-                    worksheet.Cell(currentRow, 7).Value = employee.PositionName;
-                    worksheet.Cell(currentRow, 8).Value = employee.BankAccount;
+                    worksheet.Cell(currentRow, 6).Value = employee.PositionName;
+                    worksheet.Cell(currentRow, 7).Value = employee.DepartmentName;
+                    worksheet.Cell(currentRow, 8).Value = employee.BankAccount.ToString();
                     worksheet.Cell(currentRow, 9).Value = employee.BankName;
                 }
+                worksheet.Columns("A", "I").AdjustToContents();
 
                 using (var stream = new MemoryStream())
                 {
@@ -152,6 +158,17 @@ namespace MISA.CukCuk.Core.Services
                 }
             }
         }
+
+        public Employee GetDuplicateEmployee(Guid id)
+        {
+            var newCode = base.GetNewCode();
+            var employee = _baseRepository.GetById(id);
+            employee.EmployeeCode = newCode;
+            return employee;
+        }
+
+
+
         #endregion
     }
 }
