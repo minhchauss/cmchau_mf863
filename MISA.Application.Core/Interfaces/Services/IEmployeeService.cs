@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 
 namespace MISA.CukCuk.Core.Interfaces.Services
 {
+    /// <summary>
+    /// Service nhân viên
+    /// </summary>
+    /// CreatedBy CMChau 16/6/2021
     public interface IEmployeeService : IBaseService<Employee>
     {
         #region Declare

@@ -61,7 +61,7 @@ namespace MISA.CukCuk.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Danh sách nhân viên.
+        ///   Looks up a localized string similar to Danh_sach_nhan_vien.
         /// </summary>
         internal static string File_EmployeeName {
             get {

@@ -12,13 +12,17 @@ using System.Threading.Tasks;
 
 namespace MISA.CukCuk.Web.Controllers
 {
+    /// <summary>
+    /// Controller dùng chung
+    /// </summary>
+    /// <typeparam name="MSEntity"></typeparam>
+    /// CreatedBy CMChau 17/6/2021
     [Route("api/v1/[controller]s")]
     [ApiController]
     public class BaseController<MSEntity> : ControllerBase
     {
 
         #region Declare
-        
         IBaseRepository<MSEntity> _baseRepository;
         IBaseService<MSEntity> _baseService;
         public BaseController(IBaseRepository<MSEntity> baseRepository, IBaseService<MSEntity> baseService)
@@ -162,26 +166,6 @@ namespace MISA.CukCuk.Web.Controllers
             var res = _baseService.GetNewCode();
             return Ok(res);
         }
-
-       
-
-
-        //public DataTable getData()
-        //{
-        //    //Creating DataTable  
-        //    DataTable dt = new DataTable();
-        //    //Setiing Table Name  
-        //    dt.TableName = "EmployeeData";
-        //    //Add Columns  
-        //    dt.Columns.Add("ID", typeof(int));
-        //    dt.Columns.Add("Name", typeof(string));
-        //    dt.Columns.Add("City", typeof(string));
-        //    //Add Rows in DataTable  
-        //    dt.Rows.Add(1, "Anoop Kumar Sharma", "Delhi");
-        //    dt.Rows.Add(2, "Andrew", "U.P.");
-        //    dt.AcceptChanges();
-        //    return dt;
-        //}
 
         #endregion
     }

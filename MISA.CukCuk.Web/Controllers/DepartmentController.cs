@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MISA.CukCuk.Core.Entities;
-using MISA.CukCuk.Core.Interfaces.Exceptions;
 using MISA.CukCuk.Core.Interfaces.Repository;
 using MISA.CukCuk.Core.Interfaces.Services;
 using System;
@@ -12,20 +11,16 @@ using System.Threading.Tasks;
 namespace MISA.CukCuk.Web.Controllers
 {
     /// <summary>
-    /// Controller của khách hàng
+    /// Controller phòng ban
     /// </summary>
     /// CreatedBy CMChau 17/6/2021
     [Route("api/v1/[controller]s")]
     [ApiController]
-    public class CustomerController : BaseController<Customer>
+    public class DepartmentController : BaseController<Department>
     {
-
-        #region Declare
-        public CustomerController(ICustomerRepository customerRepository, ICustomerService customerService):base(customerRepository,customerService)
+        public DepartmentController(IBaseRepository<Department> baseRepository, IBaseService<Department> baseService):base(baseRepository, baseService)
         {
-           
+
         }
-        #endregion
-      
     }
 }

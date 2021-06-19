@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace MISA.CukCuk.Web.Controllers
 {
+    /// <summary>
+    /// Controller nhân viên
+    /// </summary>
     [Route("api/v1/[controller]s")]
     [ApiController]
     public class EmployeeController : BaseController<Employee>
@@ -31,6 +34,10 @@ namespace MISA.CukCuk.Web.Controllers
 
         /// <summary>
         /// Xuất khẩu ra file excel
+        /// 200 - Xuất raq file excel
+        /// 204 - Không có dữ liệu
+        /// 400 - Dữ liệu không hợp lệ
+        /// 500 - Exception hệ thống
         /// </summary>
         /// <returns>File excel chứa thông tin nhân viên</returns>
         [HttpGet("export")]
@@ -45,6 +52,10 @@ namespace MISA.CukCuk.Web.Controllers
         /// <summary>
         /// Lấy ra thông tin nhân bản của nhân viên
         /// </summary>
+        /// 200 - Thông tin nhân viên được nhân bản
+        /// 204 - Không có dữ liệu
+        /// 400 - Dữ liệu không hợp lệ
+        /// 500 - Exception hệ thống
         /// <param name="id">id của nhân viên nhân bản</param>
         /// <returns>Thông tin nhân bản của nhân viên</returns>
         /// CreatedBy CMChau 14/6/2021
@@ -56,6 +67,23 @@ namespace MISA.CukCuk.Web.Controllers
                 return Ok(res);
             else
                 return NoContent();
+        }
+
+
+        /// <summary>
+        /// Kiểm tra trùng mã nhân viên
+        /// </summary>
+        /// 200 - True - trùng mã, false - không trùng
+        /// 204 - Không có dữ liệu
+        /// 400 - Dữ liệu không hợp lệ
+        /// 500 - Exception hệ thống
+        /// <param name="employeeCode"></param>
+        /// <returns></returns>
+        [HttpGet("checkcode")]
+        public bool CheckDuplicateCode(string employeeCode,Guid? id)
+        {
+            var res = _baseRepository.CheckCodeExist(employeeCode,id);
+            return res;
         }
     }
 }

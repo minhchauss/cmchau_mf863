@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace MISA.CukCuk.Core.Interfaces.Services
 {
+    /// <summary>
+    /// Service dùng chung
+    /// </summary>
+    /// <typeparam name="MSEntity"></typeparam>
+    /// CreatedBy CMChau 16/6/2021
     public interface IBaseService<MSEntity>
     {
         #region Methods

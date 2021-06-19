@@ -1,5 +1,6 @@
 ﻿using MISA.CukCuk.Core.Commons.Attributes;
 using MISA.CukCuk.Core.Enum;
+using MISA.CukCuk.Core.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -56,6 +57,10 @@ namespace MISA.CukCuk.Core.Entities
             get
             {
                 var name = string.Empty;
+                if(Gender==null|| Gender.ToString().Length<=0)
+                {
+                    return null;
+                }    
                 switch ((Enum.Gender)Gender)
                 {
                     case Enum.Gender.Female:
@@ -102,13 +107,13 @@ namespace MISA.CukCuk.Core.Entities
         /// Id phòng ban
         /// </summary>
         /// Created by CMChau 19/05/2021
+        [MSRequired("Phòng ban không được để trống")]
         public Guid DepartmentId { get; set; }
 
         /// <summary>
         /// Tên phòng ban
         /// </summary>
         /// Created by CMChau 19/05/2021
-        [MSRequired("Phòng ban không được để trống")]
         public string DepartmentName { get; set; }
 
         /// <summary>
@@ -160,7 +165,7 @@ namespace MISA.CukCuk.Core.Entities
         /// Số thứ tự
         /// </summary>
         /// CreatedBy CMChau 13/6/2021
-        public int Sort { set; get; }
+        public int? Sort { set; get; }
         #endregion
 
 

@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace MISA.CukCuk.Core.Interfaces.Repository
 {
+    /// <summary>
+    /// Repository dùng chung
+    /// </summary>
+    /// <typeparam name="MSEntity"></typeparam>
+    /// CreatedBy CMChau 16/6/2021
     public interface IBaseRepository<MSEntity>
     {
         #region Declare

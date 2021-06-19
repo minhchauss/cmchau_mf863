@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace MISA.CukCuk.Core.Interfaces.Repository
 {
+    /// <summary>
+    /// Repository nhân viên
+    /// </summary>
+    /// CreatedBy CMChau 16/6/2021
     public interface IEmployeeRepository : IBaseRepository<Employee>
     {
         #region Declare

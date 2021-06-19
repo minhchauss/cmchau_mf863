@@ -11,6 +11,11 @@ using System.Threading.Tasks;
 
 namespace MISA.CukCuk.Infrastructure.Repository
 {
+    /// <summary>
+    /// Repository dùng chung
+    /// </summary>
+    /// <typeparam name="MSEntity"></typeparam>
+    /// CreatedBy CMChau 16/6/2021
     public class BaseRepository<MSEntity> : IBaseRepository<MSEntity>
     {
         #region Declare
@@ -73,7 +78,7 @@ namespace MISA.CukCuk.Infrastructure.Repository
                 //Gọi procedure
                 var sqlCommand = $"Proc_Get{_className}ById";
                 // Thêm param
-                Parameters.Add($"m_{_className}Id", id);
+                Parameters.Add($"@m_{_className}Id", id);
                 // Trả về thông tin của bản ghi
                 var entity = _dbConnection.QueryFirstOrDefault<MSEntity>(sqlCommand, param: Parameters, commandType: CommandType.StoredProcedure);
                 return entity;
@@ -87,6 +92,7 @@ namespace MISA.CukCuk.Infrastructure.Repository
             {
                 // Gọi procedure
                 var sqlCommnad = $"Proc_Insert{_className}";
+                MappingProcParamValueWithObject(entity);
                 // Tiến hành thêm mới 
                 var rowEffect = _dbConnection.Execute(sqlCommnad, param: entity, commandType: CommandType.StoredProcedure);
                 return rowEffect;
@@ -119,7 +125,7 @@ namespace MISA.CukCuk.Infrastructure.Repository
                 // Gọi procedure
                 var sqlCommnad = $"Proc_Delete{_className}";
                 // Thêm param
-                Parameters.Add($"m_{_className}Id", id);
+                Parameters.Add($"@m_{_className}Id", id);
                 // Tiến hành xóa
                 var rowEffect = _dbConnection.Execute(sqlCommnad, param: Parameters, commandType: CommandType.StoredProcedure);
                 return rowEffect;
@@ -146,10 +152,9 @@ namespace MISA.CukCuk.Infrastructure.Repository
             {
                 // Gọi procedure
                 var sqlCommnad = $"Proc_Get{_className}sPagingFilter";
-                Parameters.Add($"m_PageIndex", pageIndex);
-                Parameters.Add($"m_PageSize", pageSize);
-                Parameters.Add($"m_FullName", textFilter);
-                Parameters.Add($"m_{_className}Code", textFilter);
+                Parameters.Add($"@m_PageIndex", pageIndex);
+                Parameters.Add($"@m_PageSize", pageSize);
+                Parameters.Add($"@m_TextFilter", textFilter);
                 var entities = _dbConnection.Query<MSEntity>(sqlCommnad, param: Parameters, commandType: CommandType.StoredProcedure);
                 return entities;
             }
@@ -165,8 +170,7 @@ namespace MISA.CukCuk.Infrastructure.Repository
                 // Gọi procedure
                 var sqlCommnad = $"Proc_GetCount{_className}sFilter";
                 //Truyền param
-                Parameters.Add($"m_FullName", textFilter);
-                Parameters.Add($"m_{_className}Code", textFilter);
+                Parameters.Add($"@m_TextFilter", textFilter);
                 var countNumber = _dbConnection.QueryFirstOrDefault<int>(sqlCommnad, param: Parameters, commandType: CommandType.StoredProcedure);
                 return countNumber;
             }
@@ -199,8 +203,8 @@ namespace MISA.CukCuk.Infrastructure.Repository
             {
                 // Gọi procedure
                 var sqlCommnad = $"Proc_Get{_className}sFilter";
-                Parameters.Add($"m_FullName", textFilter);
-                Parameters.Add($"m_{_className}Code", textFilter);
+                Parameters.Add($"@m_FullName", textFilter);
+                Parameters.Add($"@m_{_className}Code", textFilter);
                 var entities = _dbConnection.Query<MSEntity>(sqlCommnad, param: Parameters, commandType: CommandType.StoredProcedure);
                 return entities;
             }

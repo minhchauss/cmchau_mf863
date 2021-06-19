@@ -6,8 +6,18 @@ using System.Threading.Tasks;
 
 namespace MISA.CukCuk.Core.Interfaces.Exceptions
 {
-   public class ValidateException:Exception
+    /// <summary>
+    /// Tạo validate axception custom
+    /// </summary>
+    /// CreatedBy CMChau 16/6/2021
+    public class ValidateException:Exception
     {
+        /// <summary>
+        /// ValidateException
+        /// </summary>
+        /// <param name="msg">câu thông báo</param>
+        /// <param name="Data">Dữ liệu trả về</param>
+        /// CreatedBy CMChau 16/6/2021
         public ValidateException(string msg,object Data=null):base(msg)
         {
             var MsgError = new

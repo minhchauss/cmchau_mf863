@@ -74,7 +74,7 @@ namespace MISA.CukCuk.Core.Services
             // Kiểm tra số bản ghi/trang có lớn hơn 0
             if (pageSize <= 0)
                 throw new ValidateException(Properties.Resources.Error_PageSize, pageSize);
-
+            // nếu pagesize lớn hơn 100 thì gán pagesize = 100, nếu không thì giữ nguyên
             pageSize = pageSize > 100 ? 100 : pageSize;
             PagingResult.Items = _baseRepository.GetPagingFilter(pageIndex, pageSize, textFilter);
             PagingResult.TotalCount = _baseRepository.GetCountFilter(textFilter);

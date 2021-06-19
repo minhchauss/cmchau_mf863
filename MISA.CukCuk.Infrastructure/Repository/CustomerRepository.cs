@@ -14,6 +14,9 @@ using System.Threading.Tasks;
 
 namespace MISA.CukCuk.Infrastructure.CustomerRepos.Repository
 {
+    /// <summary>
+    /// Repository khách hàng
+    /// </summary>
     public class CustomerRepository : BaseRepository<Customer>,ICustomerRepository
     {
         #region Declare

@@ -12,11 +12,16 @@ using System.Threading.Tasks;
 
 namespace MISA.CukCuk.Infrastructure.Repository
 {
+    /// <summary>
+    /// Repositiory nhân viên
+    /// </summary>
     public class EmployeeRepository : BaseRepository<Employee>,IEmployeeRepository
     {
         #region Declare
+        //Khởi tạo chuỗi kết nối
         IDbConnection _dbConnection;
         readonly string _connectionString;
+        //Khởi tạo parameter
         DynamicParameters Parameters = new DynamicParameters();
         public EmployeeRepository(IConfiguration configuration):base(configuration)
         {

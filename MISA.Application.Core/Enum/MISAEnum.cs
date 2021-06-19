@@ -10,9 +10,6 @@ namespace MISA.CukCuk.Core.Enum
     /// Trạng thái của object
     /// </summary>
     /// Created by CMChau 22/05/2021
-    /// <summary>
-    /// Kiểu phương thức 
-    /// </summary>
     public enum EntityState
     {
         /// <summary>
